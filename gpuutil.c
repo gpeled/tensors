@@ -55,6 +55,7 @@ void init()
     nvmlReturn_t result;
     unsigned int device_count, i;
 
+    printf("Initializing NVML\n");
     result = nvmlInit();
     if (NVML_SUCCESS != result) { 
         printf("Failed to initialize NVML: %s\n", nvmlErrorString(result));
