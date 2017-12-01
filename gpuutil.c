@@ -32,7 +32,7 @@ int showUtilization(int deviceIndex,int sleepInterval, int iterations)
     }
 
   for(int i=0;i<iterations;i++) {
-    printf("About to query device utilization. sampleCount=%d\n",sampleCount);
+    //printf("About to query device utilization. sampleCount=%d\n",sampleCount);
     result = nvmlDeviceGetSamples(device, NVML_GPU_UTILIZATION_SAMPLES,
 				  lastSeenTimeStamp,&sampleValType,&sampleCount,&samples);
     if (NVML_SUCCESS != result) { 
@@ -41,8 +41,8 @@ int showUtilization(int deviceIndex,int sleepInterval, int iterations)
     }
     int util= samples.sampleValue.uiVal;
     sum+=util;
-    printf("Iteration %d. GPU utilization: %d\n",i,util );
-    sleep(sleepInterval);
+    //printf("Iteration %d. GPU utilization: %d\n",i,util );
+    if((iterations-i)>1) sleep(sleepInterval);
   }
   int average=sum/iterations;
   return average;
@@ -66,7 +66,7 @@ void init()
 static PyObject *
 getUtil(PyObject *self, PyObject *args)
 {
-  printf("getUtil called!\n");
+  //printf("getUtil called!\n");
   if(!initDone) init();
   int val=showUtilization(0,1,1);
   return Py_BuildValue("i", val);
