@@ -90,7 +90,7 @@ static struct PyModuleDef gpuutil =
     -1,   /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
     module_methods
 };
-PyMODINIT_FUNC PyInit_gpuutilmodule(void)
+PyMODINIT_FUNC PyInit_gpuutil(void)
 {
     return PyModule_Create(&gpuutil);
 }

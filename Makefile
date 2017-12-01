@@ -73,18 +73,13 @@ CFLAGS  := -I /usr/local/cuda/include
 LDFLAGS := -lnvidia-ml $(NVML_LIB_L)
 
 
-all: example gpuutilmodule.so gpuutil.so
+all: gpuutil.so
 
-example: example.o 
-	$(CC) $< $(CFLAGS) $(LDFLAGS) -o $@
 
-gpuutil.so: py-util.c
-	$(CC) $< -fpic --shared  $(CFLAGS) $(LDFLAGS) -o $@
-
-gpuutilmodule.so: py-util-module.c
+gpuutil.so: gpuutil.c
 	$(CC) $< -fpic --shared -I /usr/include/python3.5m $(CFLAGS) $(LDFLAGS) -o $@
+
 clean:
-	-@rm -f example.o
-	-@rm -f example
+	-@rm -f gpuutil.so
 
 
